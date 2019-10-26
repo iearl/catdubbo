@@ -15,7 +15,7 @@ public class ConsumerClient {
             Scanner scanner = new Scanner(System.in);
             String msg = scanner.next();
             ServiceAPI serviceAPI = (ServiceAPI)ctx.getBean("serviceApi");
-
+            System.out.println(msg);
             System.out.println(serviceAPI.sendMsg(msg));
         }
     }

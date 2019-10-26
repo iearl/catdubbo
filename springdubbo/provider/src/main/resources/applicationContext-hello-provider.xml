@@ -17,11 +17,15 @@
     <dubbo:application name="hello-word-app"/>
     <!--用dubbo协议在20880端口暴漏服务-->
     <dubbo:protocol name="dubbo" port="20880"/>
+    <!--使用zookeeper注册中心-->
+    <dubbo:registry address="zookeeper://47.101.65.44:2181"/>
     <!--配置bean-->
     <bean id="serviceApi" class="pub.ants.springdubbo.service.impl.ServiceAPIImpl"/>
+
     <!--生命需要暴漏服务得接口;  registry="N/A" dubbo直连-->
+    <!--registry="N/A" 使用注册中心去掉直连方式-->
     <dubbo:service
-            registry="N/A"
+
             interface="pub.ants.springdubbo.service.ServiceAPI"
             ref="serviceApi"/>
 
