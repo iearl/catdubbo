@@ -13,7 +13,7 @@ public class ConsumerApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(ConsumerApplication.class, args);
         Consumer bean = run.getBean(Consumer.class);
-        bean.sendMsg("hello");
+        bean.sendMsg("hello world");
 
     }
 

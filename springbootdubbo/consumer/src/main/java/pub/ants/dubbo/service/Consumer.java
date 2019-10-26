@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Consumer {
 
-    @Reference(url = "dubbo://localhost:20880")
+    @Reference(interfaceClass = ServiceAPI.class)
     ServiceAPI serviceAPI;
 
     public void sendMsg(String msg){
