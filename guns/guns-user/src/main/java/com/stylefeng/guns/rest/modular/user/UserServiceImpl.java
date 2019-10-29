@@ -1,6 +1,7 @@
 package com.stylefeng.guns.rest.modular.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.api.user.UserAPI;
 import com.stylefeng.guns.api.user.UserInfoModel;
 import com.stylefeng.guns.api.user.UserModel;
@@ -58,7 +59,14 @@ public class UserServiceImpl implements UserAPI{
     //检查用户名是否存在
     @Override
     public boolean checkUsername(String username) {
-        return false;
+        EntityWrapper<MoocUserT> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("user_name",username);
+        Integer result = moocUserTMapper.selectCount(entityWrapper);
+        if(result!=null &&result>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
