@@ -69,13 +69,62 @@ public class UserServiceImpl implements UserAPI{
         }
     }
 
+    private UserInfoModel do2UserInfo(MoocUserT moocUserT){
+        UserInfoModel userInfoModel = new UserInfoModel();
+
+        userInfoModel.setUuid(moocUserT.getUuid());
+        userInfoModel.setHeadAddress(moocUserT.getHeadUrl());
+        userInfoModel.setPhone(moocUserT.getUserPhone());
+        userInfoModel.setUpdateTime(moocUserT.getUpdateTime().getTime());
+        userInfoModel.setEmail(moocUserT.getEmail());
+        userInfoModel.setUsername(moocUserT.getUserName());
+        userInfoModel.setNickname(moocUserT.getNickName());
+        userInfoModel.setLifeState(""+moocUserT.getLifeState());
+        userInfoModel.setBirthday(moocUserT.getBirthday());
+        userInfoModel.setAddress(moocUserT.getAddress());
+        userInfoModel.setSex(moocUserT.getUserSex());
+        userInfoModel.setBeginTime(moocUserT.getBeginTime().getTime());
+        userInfoModel.setBiography(moocUserT.getBiography());
+
+        return userInfoModel;
+    }
+
     @Override
     public UserInfoModel getUserInfo(int uuid) {
-        return null;
+        // 根据主键查询用户信息 [MoocUserT]
+        MoocUserT moocUserT = moocUserTMapper.selectById(uuid);
+        // 将MoocUserT转换UserInfoModel
+        UserInfoModel userInfoModel = do2UserInfo(moocUserT);
+        // 返回UserInfoModel
+        return userInfoModel;
     }
 
     @Override
     public UserInfoModel updateUserInfo(UserInfoModel userInfoModel) {
-        return null;
+        // 将传入的参数转换为DO 【MoocUserT】
+        MoocUserT moocUserT = new MoocUserT();
+        moocUserT.setUuid(userInfoModel.getUuid());
+        moocUserT.setNickName(userInfoModel.getNickname());
+        moocUserT.setLifeState(Integer.parseInt(userInfoModel.getLifeState()));
+        moocUserT.setBirthday(userInfoModel.getBirthday());
+        moocUserT.setBiography(userInfoModel.getBiography());
+        moocUserT.setBeginTime(null);
+        moocUserT.setHeadUrl(userInfoModel.getHeadAddress());
+        moocUserT.setEmail(userInfoModel.getEmail());
+        moocUserT.setAddress(userInfoModel.getAddress());
+        moocUserT.setUserPhone(userInfoModel.getPhone());
+        moocUserT.setUserSex(userInfoModel.getSex());
+        moocUserT.setUpdateTime(null);
+
+        // DO存入数据库
+        Integer integer = moocUserTMapper.updateById(moocUserT);
+        if(integer>0){
+            // 将数据从数据库中读取出来
+            UserInfoModel userInfo = getUserInfo(moocUserT.getUuid());
+            // 将结果返回给前端
+            return userInfo;
+        }else{
+            return null;
+        }
     }
 }

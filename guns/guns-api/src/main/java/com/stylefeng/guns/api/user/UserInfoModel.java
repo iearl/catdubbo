@@ -2,18 +2,28 @@ package com.stylefeng.guns.api.user;
 
 //查询用户信息，排除敏感信息
 public class UserInfoModel {
+
+    private int uuid;
     private String username;
     private String nickname;
     private String email;
     private String phone;
     private int sex;
     private String birthday;
-    private String lifestate;
+    private String lifeState;
     private String biography;
     private String address;
     private String headAddress;
     private long beginTime;
     private long updateTime;
+
+    public int getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(int uuid) {
+        this.uuid = uuid;
+    }
 
     public String getUsername() {
         return username;
@@ -63,12 +73,12 @@ public class UserInfoModel {
         this.birthday = birthday;
     }
 
-    public String getLifestate() {
-        return lifestate;
+    public String getLifeState() {
+        return lifeState;
     }
 
-    public void setLifestate(String lifestate) {
-        this.lifestate = lifestate;
+    public void setLifeState(String lifeState) {
+        this.lifeState = lifeState;
     }
 
     public String getBiography() {
