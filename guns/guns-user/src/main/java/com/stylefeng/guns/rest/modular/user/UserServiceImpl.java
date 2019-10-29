@@ -40,12 +40,22 @@ public class UserServiceImpl implements UserAPI{
             return false;
         }
     }
+    //登录
     @Override
     public int login(String username, String password) {
+        //根据用户名查询
+        MoocUserT moocUserT = new MoocUserT();
+        moocUserT.setUserName(username);
+        MoocUserT moocUserT1 = moocUserTMapper.selectOne(moocUserT);
+        if(moocUserT1!=null && moocUserT.getUuid()>0){
+            if(MD5Util.encrypt(password).equals(password)){
+                return moocUserT.getUuid();
+            }
+        }
         return 0;
     }
 
-
+    //检查用户名是否存在
     @Override
     public boolean checkUsername(String username) {
         return false;
