@@ -1,5 +1,10 @@
 package com.stylefeng.guns.rest.modular.vo;
-//统一返回前端的样式格式
+/*
+统一返回前端的样式格式
+  status: 代表执行状态
+  msg: 返回信息
+  data: 返回前端处理数据
+ */
 public class ResponseVO<M> {
     //返回状态[0-成功，1-失败，999-系统异常]
     private int status;
@@ -20,21 +25,22 @@ public class ResponseVO<M> {
         return responseVO;
     }
 
+
     //方法业务异常
-    public static<M> ResponseVO fail(String msg){
+    public static<M> ResponseVO fail(M m){
         ResponseVO responseVO = new ResponseVO();
         responseVO.setStatus(1);
-        responseVO.setDate(null);
-        responseVO.setMsg(msg);
+        responseVO.setDate(m);
+        responseVO.setMsg("error");
         return responseVO;
     }
 
     //系统异常
-    public static<M> ResponseVO appFail(String msg){
+    public static<M> ResponseVO appFail(M m){
         ResponseVO responseVO = new ResponseVO();
         responseVO.setStatus(999);
-        responseVO.setDate(null);
-        responseVO.setMsg(msg);
+        responseVO.setDate(m);
+        responseVO.setMsg("exception");
         return responseVO;
     }
 
