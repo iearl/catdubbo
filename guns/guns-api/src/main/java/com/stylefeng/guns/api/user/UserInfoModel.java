@@ -1,7 +1,9 @@
 package com.stylefeng.guns.api.user;
 
+import java.io.Serializable;
+
 //查询用户信息，排除敏感信息
-public class UserInfoModel {
+public class UserInfoModel implements Serializable {
 
     private int uuid;
     private String username;

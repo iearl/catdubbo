@@ -48,9 +48,9 @@ public class UserServiceImpl implements UserAPI{
         MoocUserT moocUserT = new MoocUserT();
         moocUserT.setUserName(username);
         MoocUserT moocUserT1 = moocUserTMapper.selectOne(moocUserT);
-        if(moocUserT1!=null && moocUserT.getUuid()>0){
-            if(MD5Util.encrypt(password).equals(password)){
-                return moocUserT.getUuid();
+        if(moocUserT1!=null && moocUserT1.getUuid()>0){
+            if(MD5Util.encrypt(password).equals(moocUserT1.getUserPwd())){
+                return moocUserT1.getUuid();
             }
         }
         return 0;

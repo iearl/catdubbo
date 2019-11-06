@@ -4,6 +4,7 @@ target/
 *.war
 *.zip
 *.tar
+*.gz
 *.tar.gz
 
 # eclipse ignore
